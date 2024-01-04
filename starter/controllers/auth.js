@@ -14,7 +14,7 @@ const register = async(req,res)=>{
     // as the hash created value will be of large length than the maxlength:12, so we need to remove that validator
     const tempUser ={name,email,password:hashedPassword};*/
 
-    const user = await User.create({... req.body});
+    const user = await User.create({... req.body});// same as User.create(req.body)
     // const token = jwt.sign({userId : user._id,name:user.getName()},'jwtSecret',{expiresIn:'30d'});
     const token = user.createJWT();// creating token using instance method
 

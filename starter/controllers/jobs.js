@@ -3,7 +3,7 @@ const {StatusCodes}= require('http-status-codes');
 const {BadRequestError,notFoundError}= require('../errors');
 
 const getAllJobs = async(req,res)=>{
-    const jobs = await Job.find({createdBy : req.user.userId}).sort('createdBy');
+    const jobs = await Job.find({createdBy : req.user.userId}).sort('createdAt');
     res.status(StatusCodes.OK).json({jobs,count : jobs.length});
 }
 
@@ -30,7 +30,7 @@ const createJob = async(req,res)=>{
 
 const updateJob = async(req,res)=>{
     const {user:{userId},params:{id :jobId},body:{company,position}}=req;
-    if(company === "" || position===""){
+    if(company === "" || position===""){ // this may not be required as in runValidators:true, already detects empty value
         throw new BadRequestError("Company or position fields can't be empty");
     }
 

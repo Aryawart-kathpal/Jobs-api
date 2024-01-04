@@ -30,7 +30,7 @@ const errorHandlerMiddleware = (err, req, res, next) => {
     // Cast error is the error in which the syntax of the passed params id doesn't match the syntax of the mongoose id
     // when we see the cast error object it has the property with name="CastError" and the value property contains the params id we passed
     // for more info of this type we can anytime log the err object to get detail of other more objects
-    if(err.name="CastError"){
+    if(err.name==="CastError"){
         customError.msg =`No item found with id : ${err.value}`;
         customError.statusCode=StatusCodes.BAD_REQUEST;//400
     }
